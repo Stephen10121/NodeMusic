@@ -1,5 +1,3 @@
-
-
 const socket = io();
 socket.on('message', (msg)=> {
     alert(msg);
@@ -40,17 +38,38 @@ socket.on('sizenow', (data) => {
     document.getElementById('time').value = data;
     document.getElementById('maxtime').innerHTML = ms;
 });
-
+var t=0;
+var t2=false;
 function chooseFile(which) {
     console.log(`Choosing this file: ${which}`);
     socket.emit('fileSelect', which);
 }
 
 function goPlay() {
+    t2=false;
+    var intervalId = window.setInterval(function(){
+        var ms;
+        var size=t;
+        if (size>60) {
+            var j = 0;
+            while (size>60) {
+                size-=60;
+                j+=1;
+            }
+            ms = `${j}:${size}`;
+        } else {
+            ms=`00:${size}`;
+        }
+        document.getElementById('curtime').innerHTML = String(ms);
+        if (t2==false){
+            t+=1;
+        }
+    }, 1000);
     socket.emit('pause', true);
 }
 
 function goPause() {
+    t2=true;
     socket.emit('pause', false);
 }
 

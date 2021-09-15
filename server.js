@@ -30,22 +30,32 @@ app.get('/', async (req, res) => {
 app.get('/source', (req, res) => {
   res.render('source');
 });
-
+playStatus = 'pause';
 io.on('connection', socket => {
   console.log(`${socket.id} has connected.`);
 
   socket.on("fileSelect", (data) => {
       console.log(`${socket.id} chose to listen to: ${data}`);
+      socket.broadcast.emit('goPlay', `${data}`);
       socket.emit('size', getSongData(data));
   });
 
   socket.on('pause', (data) => {
     if (data!==true) {
       console.log('Music Paused');
+      if (playStatus !== 'pause') {
+        socket.broadcast.emit('goPlayPause', true);
+        playStatus = 'pause';
+      }
     } else {
+      if (playStatus !== 'play') {
+        socket.broadcast.emit('goPlayPause', false);
+        playStatus = 'play';
+      }
       console.log('Music Playing');
     }
   });
+
 
   socket.on('back', (data) => {
     if (data!==false) {
