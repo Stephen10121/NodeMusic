@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player | Gruzservices</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://image.flaticon.com/icons/png/512/37/37474.png" type="image/x-icon">
+    <script defer src="/scripts/script.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="centerpiece">
+        <div class="files">
+            <% for(jeff in files) { %>
+                <center><button class="choosefile" onclick="chooseFile('<%= files[jeff] %>')"><%= files[jeff] %></button></center>
+            <% } %>
+        </div>
+        <div class="controls">
+            <div class="progbar">
+                <center>
+                <progress id="time" class="fileprog" value="48" max="100"> 32% </progress>
+                <div class="timeit">
+                    <p id="curtime">00:00</p>-<p id="maxtime">00:00</p>
+                </div>
+                </center>
+            </div>
+            <center>
+                <div class="togg">
+                    <button class="back" onclick="goBack()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-skip-start" viewBox="0 0 16 16">
+                            <path d="M4 4a.5.5 0 0 1 1 0v3.248l6.267-3.636c.52-.302 1.233.043 1.233.696v7.384c0 .653-.713.998-1.233.696L5 8.752V12a.5.5 0 0 1-1 0V4zm7.5.633L5.696 8l5.804 3.367V4.633z"/>
+                        </svg>
+                    </button>
+                    <button id="playFile" class="pause" onclick="playFile()">
+                        <svg id="play" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z"/>
+                        </svg>
+                    </button>
+                    <button class="forward" onclick="goNext()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-skip-end" viewBox="0 0 16 16">
+                            <path d="M12.5 4a.5.5 0 0 0-1 0v3.248L5.233 3.612C4.713 3.31 4 3.655 4 4.308v7.384c0 .653.713.998 1.233.696L11.5 8.752V12a.5.5 0 0 0 1 0V4zM5 4.633 10.804 8 5 11.367V4.633z"/>
+                        </svg>
+                    </button>
+                </div>
+            </center>
+        </div>
+    </div>
+</body>
+</html>
