@@ -30,47 +30,26 @@ app.get('/', async (req, res) => {
 app.get('/source', (req, res) => {
   res.render('source');
 });
-playStatus = 'pause';
+
+var song = null;
+var paused = null;
 io.on('connection', socket => {
   console.log(`${socket.id} has connected.`);
+  io.to(socket.id).emit('adminFileChoose', song);
+  io.to(socket.id).emit('adminPause', paused);
 
-  socket.on("fileSelect", (data) => {
-      console.log(`${socket.id} chose to listen to: ${data}`);
-      socket.broadcast.emit('goPlay', `${data}`);
-      socket.emit('size', getSongData(data));
+  socket.on("fileChoose", (data) => {
+    song = data;
+    socket.broadcast.emit('adminFileChoose', `${data}`);
   });
 
   socket.on('pause', (data) => {
-    if (data!==true) {
-      console.log('Music Paused');
-      if (playStatus !== 'pause') {
-        socket.broadcast.emit('goPlayPause', true);
-        playStatus = 'pause';
-      }
+    paused = data;
+    if (data!==false) {
+      socket.broadcast.emit('adminPause', true);
     } else {
-      if (playStatus !== 'play') {
-        socket.broadcast.emit('goPlayPause', false);
-        playStatus = 'play';
-      }
-      console.log('Music Playing');
+      socket.broadcast.emit('adminPause', false);
     }
-  });
-
-
-  socket.on('back', (data) => {
-    if (data!==false) {
-      console.log("Restart");
-    }
-  });
-
-  socket.on('next', (data) => {
-    if (data!==false) {
-      console.log("Next Song.");
-    }
-  });
-  
-  socket.on('message', (data) => {
-      socket.broadcast.emit('message', data);
   });
 });
 

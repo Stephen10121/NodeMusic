@@ -1,12 +1,7 @@
 const socket = io();
-socket.on('message', (msg)=> {
-    alert(msg);
-});
-
 var audio=null;
 
-socket.on('goPlay', (data)=> {
-    console.log(data);
+socket.on('adminFileChoose', (data) => {
     if (audio!== null) {
         audio.pause();
         audio= new Audio(`/music/${data}`);
@@ -16,12 +11,10 @@ socket.on('goPlay', (data)=> {
     }
 });
 
-socket.on('goPlayPause', (data) => {
+socket.on('adminPause', (data) => {
     if (data!==true) {
-        console.log("Play");
         audio.play();
     } else {
         audio.pause();
-        console.log("Pause");
     }
 });
