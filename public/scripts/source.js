@@ -18,3 +18,15 @@ socket.on('adminPause', (data) => {
         audio.pause();
     }
 });
+
+socket.on('adminVolume', (data) => {
+    audio.volume = data/100;
+});
+
+socket.on('adminTime', (data) => {
+    audio.currentTime = data;
+});
+
+setInterval(function () {
+    socket.emit('srcTime', audio.currentTime);
+}, 1000);
