@@ -7,6 +7,9 @@ for (file in files) {
 }
 songAmount = parseInt(songAmount);
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
 
 function listenSpot() {
     $("#choose-selection-container").removeClass("moveback");
@@ -27,6 +30,37 @@ function listenDir() {
         $("#dir-section").removeClass("hide");
         $("#dir-section").toggleClass("show");
     }, 700);
+}
+
+function listenSettings() {
+    $("#choose-selection-container").removeClass("moveback");
+    $("#choose-selection-container").toggleClass("move");
+    setTimeout(function () {
+        $("#choose-selection-container").removeClass("show");
+        $("#choose-selection-container").toggleClass("hide");
+        $("#settings-section").removeClass("hide");
+        $("#settings-section").toggleClass("show");
+    }, 700);
+}
+
+function goBackSettings() {
+    $("#settings-section").removeClass("go-back");
+    $("#settings-section").toggleClass("go-left");
+    setTimeout(function () {
+        $("#settings-section").removeClass("show");
+        $("#settings-section").toggleClass("hide");
+        $("#choose-selection-container").removeClass("move");
+        $("#choose-selection-container").toggleClass("moveback");
+    }, 700);
+    setTimeout(function () {
+        $("#choose-selection-container").removeClass("hide");
+        $("#choose-selection-container").toggleClass("show");
+        $("#choose-selection-container").toggleClass("moveback");
+    }, 1100);
+    setTimeout(function () {
+        $("#settings-section").removeClass("go-left");
+        $("#settings-section").toggleClass("go-back");
+    }, 1200);
 }
 
 function goBackDir() {
@@ -98,21 +132,31 @@ function playButton() {
 }
 
 function chooseFile(file) {
+    var randomInt = getRandomInt(11)+1;
+    if (randomInt == 4) {
+        document.body.style.backgroundImage = `url(/img/background4.svg)`;
+    } else {
+        document.body.style.backgroundImage = `url(/img/background${randomInt}.png)`;
+    }
+    currentSong = file;
     socket.emit('fileChoose', file);
     currentlyPlaying(file);
     playChangeIcon();
-    currentSong = file;
 }
 
 function prevFile() {
-    for (file in files) {
-        if (files[file] == currentSong) {
-            if (file == '1') {
-                chooseFile(files[songAmount]);
-                break;
-            } else {
-                chooseFile(files[parseInt(file)-1]);
-                break;
+    if (document.getElementById('time-slider').value > 2) {
+        chooseFile(currentSong);
+    } else {
+        for (file in files) {
+            if (files[file] == currentSong) {
+                if (file == '1') {
+                    chooseFile(files[songAmount]);
+                    break;
+                } else {
+                    chooseFile(files[parseInt(file)-1]);
+                    break;
+                }
             }
         }
     }
@@ -150,3 +194,24 @@ socket.on("adminFileChoose", (data) => {
         currentSong = data;
     }
 });
+
+socket.on('adminVolume', (data) => {
+    document.getElementById('volume-slider').value = data;
+});
+
+socket.on('adminFileDuration', (data) => {
+    console.log(data);
+    document.getElementById('time-slider').max = data;
+});
+
+socket.on("adminSrcTime", (data) => {
+    document.getElementById('time-slider').value = data;
+});
+
+document.getElementById('volume-slider').oninput = function () {
+    socket.emit('volume', this.value);
+};
+
+document.getElementById('time-slider').oninput = function () {
+    socket.emit('time', this.value);
+};

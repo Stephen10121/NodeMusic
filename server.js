@@ -3,7 +3,7 @@ const https = require("http");
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
-const { getFiles, getSongData } = require('./functions.js');
+const { getFiles, getSongData} = require('./functions.js');
 const socketio = require('socket.io');
 
 const app = express();
@@ -33,13 +33,24 @@ app.get('/source', (req, res) => {
 
 var song = null;
 var paused = null;
+var volume = 70;
+var duration = getSongData(song);
+var counter = 0;
+var origin = new Date().getTime();
+
 io.on('connection', socket => {
   console.log(`${socket.id} has connected.`);
   io.to(socket.id).emit('adminFileChoose', song);
   io.to(socket.id).emit('adminPause', paused);
+  io.to(socket.id).emit('adminVolume', volume);
+  io.to(socket.id).emit('adminSrcTime', counter);
 
   socket.on("fileChoose", (data) => {
     song = data;
+    duration = getSongData(data);
+    paused = false;
+    socket.broadcast.emit("adminFileDuration", duration);
+    socket.emit("adminFileDuration", duration);
     socket.broadcast.emit('adminFileChoose', `${data}`);
   });
 
@@ -51,8 +62,21 @@ io.on('connection', socket => {
       socket.broadcast.emit('adminPause', false);
     }
   });
+
+  socket.on('volume', (data) => {
+    volume = data;
+    socket.broadcast.emit('adminVolume', data);
+  });
+
+  socket.on('srcTime', (data) => {
+    counter = data;
+    socket.broadcast.emit('adminSrcTime', data);
+  });
+
+  socket.on('time', (data) => {
+    socket.broadcast.emit('adminTime', data);
+  });
 });
 
 const PORT = 4000;
-//const PORT = 443;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}.`));

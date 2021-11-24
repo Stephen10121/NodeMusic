@@ -10,9 +10,13 @@ function getFiles() {
 }
 
 function getSongData(song) {
-    const buffer = fs.readFileSync(`./public/music/${song}`);
-    const duration = getMP3Duration(buffer);
-    return duration/1000;
+    if (song!==null) {
+        const buffer = fs.readFileSync(`./public/music/${song}`);
+        const duration = getMP3Duration(buffer);
+        return duration/1000;
+    } else {
+        return 0;
+    }
 }
 module.exports = {
     getFiles,

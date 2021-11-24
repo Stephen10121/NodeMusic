@@ -24,6 +24,22 @@
             <div id="choose-selection-container" class="choose-selection-container animate">
                 <button onclick="listenSpot()" id="choose-selection-option-spotify" class="choose-selection-option">Spotify Search</button>
                 <button onclick="listenDir()" id="choose-selection-option-dir" class="choose-selection-option">Listen From Directory</button>
+                <button id="choose-selection-option-settings" class="choose-selection-option" onclick="listenSettings()">Settings</button>
+            </div>
+            <div class="settings-section" id="settings-section">
+                <div class="settings-section-header">
+                    <button id="goBackSettings" onclick="goBackSettings()">&#8592;</button>
+                    <p>Settings section</p>
+                </div>
+                <div class="settings-section-main">
+                    <form method="post" id="setId">
+                        <center>
+                            <input type="text" name="setRoomId" placeholder="Set Room id">
+                            <input type="password" name="setRoomPassword" placeholder="Set Room Password">
+                            <input type="submit" value="Set Id"> 
+                        </center>
+                    </form>
+                </div>
             </div>
             <div id="spotify-section" class="spotify-section">
                 Spotify Section Is Not Out Yet!<br>
@@ -68,6 +84,14 @@
                                         <path d="M4.271 5.055a.5.5 0 0 1 .52.038L7.5 7.028V5.5a.5.5 0 0 1 .79-.407L11 7.028V5.5a.5.5 0 0 1 1 0v5a.5.5 0 0 1-1 0V8.972l-2.71 1.935a.5.5 0 0 1-.79-.407V8.972l-2.71 1.935A.5.5 0 0 1 4 10.5v-5a.5.5 0 0 1 .271-.445z"/>
                                     </svg>
                                 </button>
+                            </center>
+                        </div>
+                        <div class="nothing">
+                            <center><input type="range" min="0" max="100" value="0" id="time-slider"></center>   
+                        </div>
+                        <div class="volume">
+                            <center>
+                                <input type="range" min="1" max="100" value="50" id="volume-slider">
                             </center>
                         </div>
                     </div>
