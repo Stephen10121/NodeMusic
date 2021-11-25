@@ -1,0 +1,28 @@
+.LandingPage {
+  width: 100%;
+  height: 100%;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.LandingPage button:first-child {
+  margin-bottom: 10px;
+}
+
+.LandingPage button {
+  width: 90%;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  height: 30px;
+  color: #d6d6d6;
+  background: rgb(22, 39, 77);
+  cursor: pointer;
+}
+
+.LandingPage button:hover {
+  background-color: rgb(13, 23, 46);
+}

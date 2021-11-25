@@ -1,0 +1,123 @@
+.Message {
+  background-color: var(--header-color);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.chat-part {
+  background-color: #ffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin: 0;
+  width: 50%;
+  height: 50%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.chatbox {
+  width: calc(100% -10px);
+  background-color: #8ab4f8;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  margin: 5px 5px;
+  white-space: initial;
+  border-radius: 5px;
+}
+
+.chatbox p {
+  font-family: var(--accent-font);
+  font-size: 0.7rem;
+}
+
+.chatbox h4 {
+  white-space: initial;
+  word-wrap: break-word;
+  margin-top: 4px;
+  margin-left: 5px;
+}
+
+.h1part {
+  border-top-left-radius: 10px;
+  width: 100%;
+  height: 70px;
+  background-color: #dfdfdf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.submitPart {
+  width: 50%;
+  background-color: #dfdfdf;
+  height: 70px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+@media only screen and (max-width: 600px) {
+  .submitPart {
+    width: 90%;
+  }
+  .chat-part {
+    width: 90%;
+  }
+}
+
+.submitPart input {
+  margin: 15px 10px;
+}
+
+.submitPart input[type="text"] {
+  outline: none;
+  border: none;
+  padding-left: 2px;
+  box-shadow: inset rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 5px;
+}
+
+.submitPart input[type="text"]:hover,
+.submitPart input[type="text"]:focus {
+  box-shadow: inset rgba(99, 99, 99, 0.2) 0px 2px 16px 0px;
+}
+
+.submitPart input[type="submit"] {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitPart input[type="submit"]:hover {
+  background-color: #ccc;
+}
+
+.goHome {
+  margin-top: 10px;
+  width: 100px;
+  height: 30px;
+  background-color: #ddd;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.goHome a {
+  text-decoration: none;
+  color: black;
+  font-size: 0.8rem;
+}

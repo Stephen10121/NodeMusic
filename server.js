@@ -1,5 +1,4 @@
 const https = require("http");
-//const https = require("https");
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -14,10 +13,6 @@ app.use(
     express.urlencoded({ extended: true })
     );
 const server = https.createServer(
-    //{
-    //    key: fs.readFileSync(path.join(__dirname,"key.key")),
-    //    cert: fs.readFileSync(path.join(__dirname,"cert.crt"))
-    //},
     app
 );
 
@@ -37,6 +32,7 @@ var volume = 70;
 var duration = getSongData(song);
 var counter = 0;
 var origin = new Date().getTime();
+let links = {};
 
 io.on('connection', socket => {
   console.log(`${socket.id} has connected.`);
@@ -75,6 +71,11 @@ io.on('connection', socket => {
 
   socket.on('time', (data) => {
     socket.broadcast.emit('adminTime', data);
+  });
+
+  socket.on("makeRoom", (data) => {
+    links[socket.id] = data;
+    console.log(links);
   });
 });
 

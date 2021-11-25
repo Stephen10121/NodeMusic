@@ -176,6 +176,11 @@ function nextFile() {
     }
 }
 
+function setRoomId() {
+    let idLink = document.getElementById("roomIdInput").value;
+    socket.emit("makeRoom", idLink);
+}
+
 socket.on('adminPause', (data) => {
     if (data!==null) {
         if (data!==false) {

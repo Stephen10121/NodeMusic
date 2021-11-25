@@ -32,13 +32,12 @@
                     <p>Settings section</p>
                 </div>
                 <div class="settings-section-main">
-                    <form method="post" id="setId">
+                    <div id="setId">
                         <center>
-                            <input type="text" name="setRoomId" placeholder="Set Room id">
-                            <input type="password" name="setRoomPassword" placeholder="Set Room Password">
-                            <input type="submit" value="Set Id"> 
+                            <input type="text" name="roomIdMake" id="roomIdInput" placeholder="Set Room id">
+                            <button onclick="setRoomId()">Set Id</button> 
                         </center>
-                    </form>
+                    </div>
                 </div>
             </div>
             <div id="spotify-section" class="spotify-section">

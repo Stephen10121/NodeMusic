@@ -1,0 +1,8 @@
+{
+  "short_name": "ChatBox",
+  "name": "A place to chat",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
