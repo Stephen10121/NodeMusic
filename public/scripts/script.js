@@ -220,3 +220,7 @@ document.getElementById('volume-slider').oninput = function () {
 document.getElementById('time-slider').oninput = function () {
     socket.emit('time', this.value);
 };
+
+socket.on("getFiles", (data) => {
+    console.log(data);
+});

@@ -16,7 +16,12 @@ const server = https.createServer(
     app
 );
 
-const io = socketio(server);
+const io = socketio(server, {
+  cors: {
+      origin: '*',
+      methods: ['GET', 'POST']
+  }
+});
 
 app.get('/', async (req, res) => {
   res.render('index', {files: getFiles()});
@@ -77,6 +82,8 @@ io.on('connection', socket => {
     links[socket.id] = data;
     console.log(links);
   });
+
+  socket.emit("getFiles", getFiles());
 });
 
 const PORT = 4000;

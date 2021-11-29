@@ -18,6 +18,7 @@ function getSongData(song) {
         return 0;
     }
 }
+
 module.exports = {
     getFiles,
     getSongData
