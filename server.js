@@ -83,7 +83,13 @@ io.on('connection', socket => {
     console.log(links);
   });
 
-  socket.emit("getFiles", getFiles());
+  socket.on("getFiles", (data) => {
+    if (data === "new_get") {
+      io.to(socket.id).emit("getFiles", getFiles());
+      return;
+    }
+    console.log(data);
+  });
 });
 
 const PORT = 4000;

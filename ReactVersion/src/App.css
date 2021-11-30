@@ -20,6 +20,7 @@
   background-color: #343d52;
   border-radius: 10px;
   box-shadow: 5px 5px 8px 1px #888888;
+  overflow-y: scroll;
 }
 
 @media only screen and (max-width: 800px) {
