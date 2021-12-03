@@ -9,6 +9,9 @@
   justify-content: center;
   flex-direction: column;
   padding: 5px;
+  height: calc(100% - 40px);
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .song {
@@ -19,6 +22,7 @@
   text-align: left;
   border: none;
   outline: none;
+  padding: 5px;
   border-radius: 5px;
   color: #d6d6d6;
   background: rgb(22, 39, 77);
@@ -26,4 +30,32 @@
 
 .song:hover {
   background-color: rgb(13, 23, 46);
+}
+
+.header {
+  background-color: rgb(22, 39, 77);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-main);
+}
+
+.header p {
+  margin-right: 10px;
+}
+
+.header button {
+  margin-left: 10px;
+  cursor: pointer;
+  border: none;
+  height: 20px;
+  width: 45px;
+  border-radius: 3px;
+}
+
+.header button:hover {
+  background-color: #cacaca;
 }

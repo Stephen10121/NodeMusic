@@ -5,15 +5,11 @@ import Settings from "../Settings/Settings";
 const ChooseRender = (props) => {
     if (props.place === "music") {
       return(
-        <div>
-          <Music change={props.updateLocation}/>
-        </div>
+        <Music change={props.updateLocation}/>
       );
     } else if (props.place === "setting") {
       return(
-        <div>
-          <Settings change={props.updateLocation}/>
-        </div>
+        <Settings change={props.updateLocation}/>
       );
     } else {
       return(

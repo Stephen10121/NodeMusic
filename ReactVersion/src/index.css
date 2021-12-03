@@ -10,13 +10,19 @@ body {
 * {
   margin: 0;
   padding: 0;
-  font-family: var(--main-font);
+  font-family: var(--font-main);
 }
 
 :root {
-  --header-color: #f3f3f3;
-  --main-font: "Roboto", sans-serif;
-  --accent-font: "Roboto Mono", monospace;
+  --color-background: #275557;
+  --color-min-blue: #5eb1bf;
+  --color-font: #cdedf6;
+  --color-mandarin: #ef7b45;
+  --color-button: #d84727;
+  --color-button-hover: #dc583b;
+  --color-cotta: #df674d;
+  --font-main: "Roboto", sans-serif;
+  --font-accent: "Roboto Mono", monospace;
 }
 
 ::-webkit-scrollbar {

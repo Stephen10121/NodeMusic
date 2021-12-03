@@ -33,7 +33,7 @@
 }
 
 .chatbox p {
-  font-family: var(--accent-font);
+  font-family: var(--font-accent);
   font-size: 0.7rem;
 }
 
